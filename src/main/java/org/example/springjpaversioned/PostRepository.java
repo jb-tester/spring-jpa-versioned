@@ -18,6 +18,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> allPosts();
 
     @Modifying
-    @Query("update versioned Post p set p.status = :newStatus, p.title = :newTitle where p.status = :oldStatus and lower(p.title) like :pattern")
+   // @Query("update versioned Post p set p.status = :newStatus, p.title = :newTitle where p.status = :oldStatus and lower(p.title) like :pattern")
+    @Query("update versioned Post set status = :newStatus, title = :newTitle where status = :oldStatus and lower(title) like :pattern")
     void bulkPostsUpdate(@Param("newStatus") PostStatus newStatus, @Param("oldStatus") PostStatus oldStatus, @Param("pattern") String pattern, @Param("newTitle") String newTitle);
 }
